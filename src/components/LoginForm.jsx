@@ -1,3 +1,8 @@
+import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from 'react';
+import { GraduationCap, BookOpen, Users, ChevronRight, ArrowLeft,Eye } from 'lucide-react';
+
+
 // Login Form Component
 const LoginForm = ({ role, onNavigate }) => {
   const { login, loading } = useAuth();
@@ -138,3 +143,5 @@ const LoginForm = ({ role, onNavigate }) => {
     </div>
   );
 };
+
+export default LoginForm;

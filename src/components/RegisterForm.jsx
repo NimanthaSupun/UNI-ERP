@@ -1,3 +1,7 @@
+import { useAuth } from '../contexts/AuthContext';
+import React, { useState } from 'react';
+import { GraduationCap, BookOpen, Users, ChevronRight, ArrowLeft,Eye } from 'lucide-react';
+
 // Register Form Component
 const RegisterForm = ({ role, onNavigate }) => {
   const { register, loading } = useAuth();
@@ -416,3 +420,5 @@ const RegisterForm = ({ role, onNavigate }) => {
     </div>
   );
 };
+
+export default RegisterForm;

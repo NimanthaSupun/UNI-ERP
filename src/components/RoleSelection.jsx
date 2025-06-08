@@ -1,3 +1,7 @@
+import React, { useState } from 'react';
+import { GraduationCap, BookOpen, Users, ChevronRight } from 'lucide-react';
+
+
 const RoleSelection = ({ onRoleSelect }) => {
   const [hoveredRole, setHoveredRole] = useState(null);
 
@@ -106,3 +110,4 @@ const RoleSelection = ({ onRoleSelect }) => {
     </div>
   );
 };
+export default RoleSelection;
