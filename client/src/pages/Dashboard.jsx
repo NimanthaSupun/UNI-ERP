@@ -80,12 +80,14 @@ const Dashboard = () => {
               <div>
                 <label className="block text-slate-400 mb-1 text-sm">Designation</label>
                 <p className="text-white font-medium">{user.designation}</p>
+
               </div>
             )}
             {user.department && (
               <div>
                 <label className="block text-slate-400 mb-1 text-sm">Department</label>
                 <p className="text-white font-medium">{user.department}</p>
+                
               </div>
             )}
             {user.yearOfStudy && (
