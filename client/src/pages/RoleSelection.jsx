@@ -50,7 +50,7 @@ const RoleSelection = () => {
                 onMouseLeave={() => setHoveredRole(null)}
                 onClick={() => handleRoleSelect(role)}
               >
-                <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl overflow-hidden">
+                <div className="relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl overflow-hidden h-100">
                   <div className={`absolute inset-0 bg-gradient-to-br ${
                     isHovered ? roleInfo.hoverColor : roleInfo.color
                   } opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
