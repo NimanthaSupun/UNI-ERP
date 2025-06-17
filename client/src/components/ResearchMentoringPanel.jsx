@@ -322,7 +322,7 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-200 via-blue-300 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-400 via-blue-400 to-indigo-400">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
