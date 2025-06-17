@@ -364,7 +364,7 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
               className="flex items-center hover:text-blue-600 mb-2 transition-colors text-xl"
             >
               <ArrowLeft className="w-5 h-5 mr-2"/>
-              Back Dashboard
+              Back to Dashboard
             </button>
           </div>
 
