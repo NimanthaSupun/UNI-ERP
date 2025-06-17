@@ -1,71 +1,45 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './context/AuthContext.jsx';
-import ProtectedRoute from './components/ProtectedRoute.jsx';
-import RoleSelection from './pages/RoleSelection.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import Dashboard from './pages/Dashboard.jsx';
+import React, { useState } from "react";
+import { AuthProvider, useAuth } from "./context/AuthContext";
+import RoleSelection from "./components/RoleSelection";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import Dashboard from "./components/Dashboard";
+import ResearchMentoringPanel from "./components/ResearchMentoringPanel";
 
-// Component to handle authenticated user redirects
-const AuthenticatedRedirect = ({ children }) => {
+const UniversityERPApp = () => {
+  const [currentPage, setCurrentPage] = useState("home");
+  const [selectedRole, setSelectedRole] = useState(null);
   const { user } = useAuth();
-  
-  if (user) {
-    return <Navigate to="/dashboard" replace />;
+    console.log("Current page:", currentPage);
+
+
+  const navigate = (page, role = null) => {
+    setCurrentPage(page);
+    if (role) setSelectedRole(role);
+  };
+
+  if (user) return <Dashboard user={user} onNavigate={navigate} />;
+
+  switch (currentPage) {
+    case "home":
+      return <RoleSelection onRoleSelect={navigate} />;
+    case "login":
+      return <LoginForm role={selectedRole} onNavigate={navigate} />;
+    case "register":
+      return <RegisterForm role={selectedRole} onNavigate={navigate} />;
+    case "mentoring":
+      return <ResearchMentoringPanel onNavigate={navigate} />;
+    default:
+      return <RoleSelection onRoleSelect={navigate} />;
   }
-  
-  return children;
 };
 
-const App = () => {
+function App() {
   return (
     <AuthProvider>
-      
-      <Router>
-        <Routes>
-          {/* Public Routes */}
-          <Route 
-            path="/" 
-            element={
-              <AuthenticatedRedirect>
-                <RoleSelection />
-              </AuthenticatedRedirect>
-            } 
-          />
-          <Route 
-            path="/login/:role" 
-            element={
-              <AuthenticatedRedirect>
-                <Login />
-              </AuthenticatedRedirect>
-            } 
-          />
-          <Route 
-            path="/register/:role" 
-            element={
-              <AuthenticatedRedirect>
-                <Register />
-              </AuthenticatedRedirect>
-            } 
-          />
-          
-          {/* Protected Routes */}
-          <Route 
-            path="/dashboard" 
-            element={
-              <ProtectedRoute>
-                <Dashboard />
-              </ProtectedRoute>
-            } 
-          />
-          
-          {/* Catch all route */}
-          <Route path="*" element={<Navigate to="/\" replace />} />
-        </Routes>
-      </Router>
+      <UniversityERPApp />
     </AuthProvider>
   );
-};
+}
 
 export default App;
