@@ -1,24 +1,33 @@
-import React, { useState } from 'react';
-import { GraduationCap, BookOpen, Users, Eye, EyeOff, ArrowLeft, Check, X } from 'lucide-react';
-import { useAuth } from '../context/AuthContext';
+import React, { useState } from "react";
+import {
+  GraduationCap,
+  BookOpen,
+  Users,
+  Eye,
+  EyeOff,
+  ArrowLeft,
+  Check,
+  X,
+} from "lucide-react";
+import { useAuth } from "../context/AuthContext";
 
 const RegisterForm = ({ role, onNavigate }) => {
   const { register, loading } = useAuth();
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
+    fullName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [passwordStrength, setPasswordStrength] = useState(0);
   const [roleSpecificData, setRoleSpecificData] = useState({});
 
   // If role is not set, redirect to role selection
   if (!role) {
-    onNavigate('home');
+    onNavigate("home");
     return null;
   }
 
@@ -33,40 +42,61 @@ const RegisterForm = ({ role, onNavigate }) => {
   };
 
   const handlePasswordChange = (password) => {
-    setFormData({...formData, password});
+    setFormData({ ...formData, password });
     setPasswordStrength(checkPasswordStrength(password));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
+    setError("");
     if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
+      setError("Passwords do not match");
       return;
     }
     if (passwordStrength < 3) {
-      setError('Password is too weak. Please use a stronger password.');
+      setError("Password is too weak. Please use a stronger password.");
       return;
     }
     const userData = {
       ...formData,
       ...roleSpecificData,
-      role
+      role,
     };
+    if (result.success) {
+      onNavigate("dashboard");
+    } else {
+      setError(result.message);
+    }
     const result = await register(userData);
     if (!result.success) setError(result.message);
   };
 
   const getRoleInfo = () => {
     switch (role) {
-      case 'student':
-        return { title: 'Student Registration', color: 'from-blue-500 to-blue-600', icon: GraduationCap };
-      case 'lecturer':
-        return { title: 'Lecturer Registration', color: 'from-emerald-500 to-emerald-600', icon: BookOpen };
-      case 'coordinator':
-        return { title: 'Coordinator Registration', color: 'from-purple-500 to-purple-600', icon: Users };
+      case "student":
+        return {
+          title: "Student Registration",
+          color: "from-blue-500 to-blue-600",
+          icon: GraduationCap,
+        };
+      case "lecturer":
+        return {
+          title: "Lecturer Registration",
+          color: "from-emerald-500 to-emerald-600",
+          icon: BookOpen,
+        };
+      case "coordinator":
+        return {
+          title: "Coordinator Registration",
+          color: "from-purple-500 to-purple-600",
+          icon: Users,
+        };
       default:
-        return { title: 'Registration', color: 'from-gray-500 to-gray-600', icon: GraduationCap };
+        return {
+          title: "Registration",
+          color: "from-gray-500 to-gray-600",
+          icon: GraduationCap,
+        };
     }
   };
 
@@ -75,25 +105,39 @@ const RegisterForm = ({ role, onNavigate }) => {
 
   const renderRoleSpecificFields = () => {
     switch (role) {
-      case 'student':
+      case "student":
         return (
           <>
             <div>
-              <label className="block text-white mb-2 font-medium">Student ID</label>
+              <label className="block text-white mb-2 font-medium">
+                Student ID
+              </label>
               <input
                 type="text"
-                value={roleSpecificData.studentId || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, studentId: e.target.value})}
+                value={roleSpecificData.studentId || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    studentId: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your student ID"
                 required
               />
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Degree Program</label>
+              <label className="block text-white mb-2 font-medium">
+                Degree Program
+              </label>
               <select
-                value={roleSpecificData.degreeProgram || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, degreeProgram: e.target.value})}
+                value={roleSpecificData.degreeProgram || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    degreeProgram: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -105,10 +149,17 @@ const RegisterForm = ({ role, onNavigate }) => {
               </select>
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Year of Study</label>
+              <label className="block text-white mb-2 font-medium">
+                Year of Study
+              </label>
               <select
-                value={roleSpecificData.yearOfStudy || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, yearOfStudy: e.target.value})}
+                value={roleSpecificData.yearOfStudy || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    yearOfStudy: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -120,10 +171,17 @@ const RegisterForm = ({ role, onNavigate }) => {
               </select>
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Faculty / Department</label>
+              <label className="block text-white mb-2 font-medium">
+                Faculty / Department
+              </label>
               <select
-                value={roleSpecificData.department || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, department: e.target.value})}
+                value={roleSpecificData.department || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    department: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -136,25 +194,39 @@ const RegisterForm = ({ role, onNavigate }) => {
             </div>
           </>
         );
-      case 'lecturer':
+      case "lecturer":
         return (
           <>
             <div>
-              <label className="block text-white mb-2 font-medium">Staff ID</label>
+              <label className="block text-white mb-2 font-medium">
+                Staff ID
+              </label>
               <input
                 type="text"
-                value={roleSpecificData.staffId || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, staffId: e.target.value})}
+                value={roleSpecificData.staffId || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    staffId: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your staff ID"
                 required
               />
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Designation</label>
+              <label className="block text-white mb-2 font-medium">
+                Designation
+              </label>
               <select
-                value={roleSpecificData.designation || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, designation: e.target.value})}
+                value={roleSpecificData.designation || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    designation: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -166,10 +238,17 @@ const RegisterForm = ({ role, onNavigate }) => {
               </select>
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Department</label>
+              <label className="block text-white mb-2 font-medium">
+                Department
+              </label>
               <select
-                value={roleSpecificData.department || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, department: e.target.value})}
+                value={roleSpecificData.department || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    department: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -182,40 +261,63 @@ const RegisterForm = ({ role, onNavigate }) => {
             </div>
           </>
         );
-      case 'coordinator':
+      case "coordinator":
         return (
           <>
             <div>
-              <label className="block text-white mb-2 font-medium">Staff ID</label>
+              <label className="block text-white mb-2 font-medium">
+                Staff ID
+              </label>
               <input
                 type="text"
-                value={roleSpecificData.staffId || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, staffId: e.target.value})}
+                value={roleSpecificData.staffId || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    staffId: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your staff ID"
                 required
               />
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Designation</label>
+              <label className="block text-white mb-2 font-medium">
+                Designation
+              </label>
               <select
-                value={roleSpecificData.designation || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, designation: e.target.value})}
+                value={roleSpecificData.designation || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    designation: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
                 <option value="">Select designation</option>
                 <option value="Timetable Officer">Timetable Officer</option>
                 <option value="Hall Manager">Hall Manager</option>
-                <option value="Academic Coordinator">Academic Coordinator</option>
+                <option value="Academic Coordinator">
+                  Academic Coordinator
+                </option>
                 <option value="Program Coordinator">Program Coordinator</option>
               </select>
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Department</label>
+              <label className="block text-white mb-2 font-medium">
+                Department
+              </label>
               <select
-                value={roleSpecificData.department || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, department: e.target.value})}
+                value={roleSpecificData.department || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    department: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 required
               >
@@ -227,11 +329,18 @@ const RegisterForm = ({ role, onNavigate }) => {
               </select>
             </div>
             <div>
-              <label className="block text-white mb-2 font-medium">Contact Number (Optional)</label>
+              <label className="block text-white mb-2 font-medium">
+                Contact Number (Optional)
+              </label>
               <input
                 type="tel"
-                value={roleSpecificData.contactNumber || ''}
-                onChange={(e) => setRoleSpecificData({...roleSpecificData, contactNumber: e.target.value})}
+                value={roleSpecificData.contactNumber || ""}
+                onChange={(e) =>
+                  setRoleSpecificData({
+                    ...roleSpecificData,
+                    contactNumber: e.target.value,
+                  })
+                }
                 className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 placeholder="Enter your contact number"
               />
@@ -252,7 +361,7 @@ const RegisterForm = ({ role, onNavigate }) => {
       <div className="relative z-10 flex items-center justify-center min-h-screen p-8">
         <div className="w-full max-w-md">
           <button
-            onClick={() => onNavigate('login', role)}
+            onClick={() => onNavigate("login", role)}
             className="flex items-center text-white/70 hover:text-white mb-8 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -260,10 +369,14 @@ const RegisterForm = ({ role, onNavigate }) => {
           </button>
           <div className="bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl">
             <div className="text-center mb-8">
-              <div className={`w-16 h-16 bg-gradient-to-r ${roleInfo.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl`}>
+              <div
+                className={`w-16 h-16 bg-gradient-to-r ${roleInfo.color} rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-xl`}
+              >
                 <IconComponent className="w-8 h-8 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-white mb-2">{roleInfo.title}</h2>
+              <h2 className="text-3xl font-bold text-white mb-2">
+                {roleInfo.title}
+              </h2>
               <p className="text-slate-300">Create your account</p>
             </div>
             <form onSubmit={handleSubmit} className="space-y-6">
@@ -273,32 +386,42 @@ const RegisterForm = ({ role, onNavigate }) => {
                 </div>
               )}
               <div>
-                <label className="block text-white mb-2 font-medium">Full Name</label>
+                <label className="block text-white mb-2 font-medium">
+                  Full Name
+                </label>
                 <input
                   type="text"
                   value={formData.fullName}
-                  onChange={(e) => setFormData({...formData, fullName: e.target.value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, fullName: e.target.value })
+                  }
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Enter your full name"
                   required
                 />
               </div>
               <div>
-                <label className="block text-white mb-2 font-medium">Email Address</label>
+                <label className="block text-white mb-2 font-medium">
+                  Email Address
+                </label>
                 <input
                   type="email"
                   value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
                   className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                   placeholder="Enter your institutional email"
                   required
                 />
               </div>
               <div>
-                <label className="block text-white mb-2 font-medium">Password</label>
+                <label className="block text-white mb-2 font-medium">
+                  Password
+                </label>
                 <div className="relative">
                   <input
-                    type={showPassword ? 'text' : 'password'}
+                    type={showPassword ? "text" : "password"}
                     value={formData.password}
                     onChange={(e) => handlePasswordChange(e.target.value)}
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
@@ -310,7 +433,11 @@ const RegisterForm = ({ role, onNavigate }) => {
                     onClick={() => setShowPassword(!showPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
                   >
-                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
                 {formData.password && (
@@ -322,31 +449,40 @@ const RegisterForm = ({ role, onNavigate }) => {
                           className={`h-2 flex-1 rounded ${
                             i < passwordStrength
                               ? passwordStrength <= 2
-                                ? 'bg-red-500'
+                                ? "bg-red-500"
                                 : passwordStrength <= 3
-                                ? 'bg-yellow-500'
-                                : 'bg-green-500'
-                              : 'bg-gray-600'
+                                ? "bg-yellow-500"
+                                : "bg-green-500"
+                              : "bg-gray-600"
                           }`}
                         />
                       ))}
                     </div>
                     <p className="text-xs text-slate-400 mt-1">
-                      Password strength: {
-                        passwordStrength <= 2 ? 'Weak' :
-                        passwordStrength <= 3 ? 'Medium' : 'Strong'
-                      }
+                      Password strength:{" "}
+                      {passwordStrength <= 2
+                        ? "Weak"
+                        : passwordStrength <= 3
+                        ? "Medium"
+                        : "Strong"}
                     </p>
                   </div>
                 )}
               </div>
               <div>
-                <label className="block text-white mb-2 font-medium">Confirm Password</label>
+                <label className="block text-white mb-2 font-medium">
+                  Confirm Password
+                </label>
                 <div className="relative">
                   <input
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={showConfirmPassword ? "text" : "password"}
                     value={formData.confirmPassword}
-                    onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        confirmPassword: e.target.value,
+                      })
+                    }
                     className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-xl text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent pr-12"
                     placeholder="Confirm your password"
                     required
@@ -356,21 +492,27 @@ const RegisterForm = ({ role, onNavigate }) => {
                     onClick={() => setShowConfirmPassword(!showConfirmPassword)}
                     className="absolute right-4 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
                   >
-                    {showConfirmPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                    {showConfirmPassword ? (
+                      <EyeOff className="w-5 h-5" />
+                    ) : (
+                      <Eye className="w-5 h-5" />
+                    )}
                   </button>
                 </div>
-                {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-                  <p className="text-red-400 text-xs mt-1 flex items-center">
-                    <X className="w-3 h-3 mr-1" />
-                    Passwords do not match
-                  </p>
-                )}
-                {formData.confirmPassword && formData.password === formData.confirmPassword && (
-                  <p className="text-green-400 text-xs mt-1 flex items-center">
-                    <Check className="w-3 h-3 mr-1" />
-                    Passwords match
-                  </p>
-                )}
+                {formData.confirmPassword &&
+                  formData.password !== formData.confirmPassword && (
+                    <p className="text-red-400 text-xs mt-1 flex items-center">
+                      <X className="w-3 h-3 mr-1" />
+                      Passwords do not match
+                    </p>
+                  )}
+                {formData.confirmPassword &&
+                  formData.password === formData.confirmPassword && (
+                    <p className="text-green-400 text-xs mt-1 flex items-center">
+                      <Check className="w-3 h-3 mr-1" />
+                      Passwords match
+                    </p>
+                  )}
               </div>
               {renderRoleSpecificFields()}
               <button
@@ -378,14 +520,14 @@ const RegisterForm = ({ role, onNavigate }) => {
                 disabled={loading}
                 className={`w-full py-3 bg-gradient-to-r ${roleInfo.color} text-white rounded-xl font-semibold transition-all duration-300 hover:shadow-lg hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed`}
               >
-                {loading ? 'Creating Account...' : 'Create Account'}
+                {loading ? "Creating Account..." : "Create Account"}
               </button>
             </form>
             <div className="text-center mt-6">
               <p className="text-slate-300">
-                Already have an account?{' '}
+                Already have an account?{" "}
                 <button
-                  onClick={() => onNavigate('login', role)}
+                  onClick={() => onNavigate("login", role)}
                   className="text-blue-400 hover:text-blue-300 font-medium"
                 >
                   Sign in here
