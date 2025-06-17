@@ -96,7 +96,7 @@ const Dashboard = ({ user, onNavigate }) => {
   const roleBlocks = getRoleBlocks();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-800 to-indigo-800 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-600 via-blue-700 to-indigo-700 relative overflow-hidden">
       {/* Enhanced Background Elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 left-20 w-72 h-72 bg-white rounded-full blur-3xl"></div>

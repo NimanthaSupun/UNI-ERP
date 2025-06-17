@@ -266,27 +266,6 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
             </div>
 
             <div className="grid gap-6">
-              {/* {recommendedTopics.map((topic, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 p-6 border-l-4 border-gradient-to-b from-green-500 to-blue-500"
-                >
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="font-semibold text-xl text-gray-800 mb-2">
-                        {topic}
-                      </h3>
-                      <div className="flex items-center text-sm text-gray-600">
-                        <Star className="w-4 h-4 text-yellow-500 mr-1" />
-                        <span>Recommendation #{index + 1}</span>
-                      </div>
-                    </div>
-                    <div className="text-3xl">
-                      {index === 0 ? "🏆" : index === 1 ? "🥈" : "🥉"}
-                    </div>
-                  </div>
-                </div>
-              ))} */}
               {recommendedTopics.map((rec, index) => (
                 <div
                   key={index}
@@ -343,7 +322,7 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-blue-50 to-teal-50">
+    <div className="min-h-screen bg-gradient-to-br from-green-200 via-blue-300 to-teal-50">
       <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           {/* Header */}
