@@ -25,10 +25,7 @@ reverse_mapping = {
     9: 'AI Ethics, Policy & Governance'
 }
 def predict_student_career(student_features):
-    """
-    Predict career path for a new student
-    student_features: array of 32 features for one student
-    """
+    
     # Scale the features
     student_scaled = scaler_data.transform([student_features])
     
