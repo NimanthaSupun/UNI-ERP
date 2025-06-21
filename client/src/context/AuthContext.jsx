@@ -5,7 +5,8 @@ const AuthContext = createContext(null);
 const dummyUsers = [
   {
     id: 1,
-    email: 'john.student@university.edu',
+    // email: 'john.student@university.edu',
+    email: 'supunnimantha199@gmail.com',
     password: 'password123',
     role: 'student',
     fullName: 'John Doe',
