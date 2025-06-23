@@ -170,7 +170,7 @@ const StudentDashboard = () => {
                         <h2 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h2>
                         <div className="space-y-3">
                             <Link
-                                to="/supervisors"
+                                to="../supervisors"
                                 className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                             >
                                 <Users className="h-5 w-5 text-blue-600 mr-3" />
@@ -178,7 +178,7 @@ const StudentDashboard = () => {
                             </Link>
                             
                             <Link
-                                to="/collaboration"
+                                to="../collaboration"
                                 className="flex items-center p-3 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                             >
                                 <MessageSquare className="h-5 w-5 text-emerald-600 mr-3" />

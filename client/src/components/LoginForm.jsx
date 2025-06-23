@@ -8,16 +8,21 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const LoginForm = ({ role, onNavigate }) => {
+const LoginForm = ({}) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { login, loading } = useAuth();
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
+  const role = location.state?.role || "student"; // fallback if not set
+
   // If role is not set, redirect to role selection
   if (!role) {
-    onNavigate("home");
+    // onNavigate("home");
     return null;
   }
 
@@ -27,12 +32,14 @@ const LoginForm = ({ role, onNavigate }) => {
   //     const result = await login(formData.email, formData.password, role);
   //     if (!result.success) setError(result.message);
   //   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     const result = await login(formData.email, formData.password, role);
     if (result.success) {
-      onNavigate("dashboard");
+      // onNavigate("dashboard");
+      navigate("/dashboard");
     } else {
       setError(result.message);
     }
@@ -79,7 +86,8 @@ const LoginForm = ({ role, onNavigate }) => {
       <div className="relative z-10 flex items-center justify-center min-h-screen p-8">
         <div className="w-full max-w-md">
           <button
-            onClick={() => onNavigate("home")}
+            // onClick={() => onNavigate("home")}
+            onClick={() => navigate("/")}
             className="flex items-center text-white/70 hover:text-white mb-8 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
@@ -159,7 +167,7 @@ const LoginForm = ({ role, onNavigate }) => {
               <p className="text-slate-300">
                 Don't have an account?{" "}
                 <button
-                  onClick={() => onNavigate("register", role)}
+                  onClick={() => navigate("/register", { state: { role } })}
                   className="text-blue-400 hover:text-blue-300 font-medium"
                 >
                   Register here

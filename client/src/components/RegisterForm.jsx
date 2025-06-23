@@ -10,9 +10,13 @@ import {
   X,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate, useLocation } from "react-router-dom";
 
-const RegisterForm = ({ role, onNavigate }) => {
+const RegisterForm = ({}) => {
   const { register, loading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const role = location.state?.role;
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -26,10 +30,16 @@ const RegisterForm = ({ role, onNavigate }) => {
   const [roleSpecificData, setRoleSpecificData] = useState({});
 
   // If role is not set, redirect to role selection
-  if (!role) {
-    onNavigate("home");
-    return null;
-  }
+  // if (!role) {
+  //   // onNavigate("home");
+  //   navigate("/")
+  //   return null;
+  // }
+  React.useEffect(() => {
+    if (!role) {
+      navigate("/", { replace: true });
+    }
+  }, [role, navigate]);
 
   const checkPasswordStrength = (password) => {
     let strength = 0;
@@ -63,7 +73,8 @@ const RegisterForm = ({ role, onNavigate }) => {
       role,
     };
     if (result.success) {
-      onNavigate("dashboard");
+      // onNavigate("dashboard");
+      navigate("/dashboard");
     } else {
       setError(result.message);
     }
@@ -361,7 +372,8 @@ const RegisterForm = ({ role, onNavigate }) => {
       <div className="relative z-10 flex items-center justify-center min-h-screen p-8">
         <div className="w-full max-w-md">
           <button
-            onClick={() => onNavigate("login", role)}
+            // onClick={() => onNavigate("login", role)}
+            onClick={() => navigate("/login", role)}
             className="flex items-center text-white/70 hover:text-white mb-8 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />

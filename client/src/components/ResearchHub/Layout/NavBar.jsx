@@ -22,7 +22,7 @@ const Navbar = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2">
+                    <Link to="indashboard" className="flex items-center space-x-2">
                         <div className="p-2 bg-blue-600 rounded-lg">
                             <Brain className="h-6 w-6 text-white" />
                         </div>
@@ -44,7 +44,7 @@ const Navbar = () => {
                     {/* Navigation Links */}
                     <div className="flex items-center space-x-4">
                         <Link
-                            to="/indashboard"
+                            to="indashboard"
                             className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                                 isActive('/indashboard')
                                     ? 'text-blue-600 bg-blue-50'
@@ -56,7 +56,7 @@ const Navbar = () => {
                         </Link>
                         
                         <Link
-                            to="/supervisors"
+                            to="supervisors"
                             className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                                 isActive('/supervisors')
                                     ? 'text-blue-600 bg-blue-50'
@@ -68,7 +68,7 @@ const Navbar = () => {
                         </Link>
 
                         <Link
-                            to="/collaboration"
+                            to="collaboration"
                             className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                                 isActive('/collaboration')
                                     ? 'text-blue-600 bg-blue-50'
@@ -98,14 +98,14 @@ const Navbar = () => {
                             
                             <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
                                 <Link
-                                    to="/profile"
+                                    to="profile"
                                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                                 >
                                     <User className="h-4 w-4 mr-2" />
                                     Profile
                                 </Link>
                                 <Link
-                                    to="/settings"
+                                    to="settings"
                                     className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                                 >
                                     <Settings className="h-4 w-4 mr-2" />

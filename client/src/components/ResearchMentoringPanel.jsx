@@ -11,9 +11,12 @@ import {
   Loader,
   ArrowLeft,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
-const ResearchMentoringPanel = ({ onNavigate }) => {
+const ResearchMentoringPanel = ({}) => {
   const [currentStep, setCurrentStep] = useState(1);
+  // const { user, logout } = useAuth();
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     researchPathway: -1, // Index of selected pathway (0-17)
     projectType: -1, // Index of selected project type (0-2)
@@ -314,6 +317,15 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
               >
                 Take Assessment Again
               </button>
+              <div>
+                <button
+                  // onClick={() => onNavigate("/test")}
+                  onClick={() => navigate("/researchhub")}
+                  className="bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-3 rounded-lg hover:from-green-700 hover:to-blue-700 transition-all duration-300 font-medium mt-10"
+                >
+                  ResearchHub
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -342,7 +354,7 @@ const ResearchMentoringPanel = ({ onNavigate }) => {
               onClick={() => onNavigate("dashboard")}
               className="flex items-center hover:text-blue-600 mb-2 transition-colors text-xl"
             >
-              <ArrowLeft className="w-5 h-5 mr-2"/>
+              <ArrowLeft className="w-5 h-5 mr-2" />
               Back to Dashboard
             </button>
           </div>

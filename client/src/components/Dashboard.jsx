@@ -14,9 +14,11 @@ import {
   Brain,
 } from "lucide-react";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
-const Dashboard = ({ user, onNavigate }) => {
-  const { logout } = useAuth();
+const Dashboard = ({}) => {
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const getRoleInfo = () => {
     switch (user.role) {
@@ -47,11 +49,15 @@ const Dashboard = ({ user, onNavigate }) => {
     }
   };
 
+  // const handleLogout = () => {
+  //   logout();
+  //   if (onNavigate) {
+  //     onNavigate("home", null); // Reset to role selection and clear selectedRole
+  //   }
+  // };
   const handleLogout = () => {
     logout();
-    if (onNavigate) {
-      onNavigate("home", null); // Reset to role selection and clear selectedRole
-    }
+    navigate("/", { replace: true });
   };
 
   const roleInfo = getRoleInfo();
@@ -302,7 +308,8 @@ const Dashboard = ({ user, onNavigate }) => {
                   className="group relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border border-white/20 shadow-2xl hover:shadow-3xl transition-all duration-500 hover:scale-105 cursor-pointer overflow-hidden"
                   onClick={() => {
                     console.log("Card clicked!");
-                    navTarget && onNavigate(navTarget);
+                    // navTarget && onNavigate(navTarget);
+                    if (navTarget) navigate("/" + navTarget);
                   }}
                 >
                   {/* Background gradient effect */}

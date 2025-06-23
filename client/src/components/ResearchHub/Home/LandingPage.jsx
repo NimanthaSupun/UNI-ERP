@@ -42,14 +42,14 @@ function LandingPage() {
                         
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Link
-                                to="/dashboard"
+                                to="indashboard"
                                 className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-semibold"
                             >
                                 Get Started
                                 <ArrowRight className="ml-2 h-5 w-5" />
                             </Link>
                             <Link
-                                to="/supervisors"
+                                to="supervisors"
                                 className="inline-flex items-center px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg hover:border-gray-400 hover:bg-gray-50 transition-colors font-semibold"
                             >
                                 Browse Supervisors
@@ -247,14 +247,14 @@ function LandingPage() {
                     
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
-                            to="/dashboard"
+                            to="indashboard"
                             className="inline-flex items-center px-8 py-4 bg-white text-blue-600 rounded-lg hover:bg-gray-100 transition-colors font-semibold"
                         >
                             Start Research Project
                             <ArrowRight className="ml-2 h-5 w-5" />
                         </Link>
                         <Link
-                            to="/supervisors"
+                            to="supervisors"
                             className="inline-flex items-center px-8 py-4 border-2 border-white text-white rounded-lg hover:bg-white hover:text-blue-600 transition-colors font-semibold"
                         >
                             Find Supervisors
