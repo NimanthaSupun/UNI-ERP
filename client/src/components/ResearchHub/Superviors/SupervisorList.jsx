@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, Filter, SortAsc } from 'lucide-react';
 import SupervisorCard from './SupervisorCard';
-import { mockSupervisors } from '../../data/mockData';
+import { mockSupervisors } from '../data/mockData.js';
 
 const SupervisorList = () => {
     const [supervisors] = useState(mockSupervisors);

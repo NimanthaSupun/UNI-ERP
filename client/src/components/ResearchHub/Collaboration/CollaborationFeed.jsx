@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Heart, MessageCircle, Share2, Bookmark, MoreHorizontal, Filter, TrendingUp as Trending, Clock } from 'lucide-react';
-import { mockProjects } from '../../data/mockData';
+import { mockProjects } from '../data/mockData.js';
 
 const CollaborationFeed = () => {
     const [activeFilter, setActiveFilter] = useState('all');
