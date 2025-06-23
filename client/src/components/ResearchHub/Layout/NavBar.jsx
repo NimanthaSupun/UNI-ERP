@@ -10,7 +10,7 @@ import {
     MessageSquare,
     Settings
 } from 'lucide-react';
-import { mockUser } from '../data/mockData';
+import { mockUser } from '../data/mockData.js';
 
 const Navbar = () => {
     const location = useLocation();
