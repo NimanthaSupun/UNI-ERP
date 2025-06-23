@@ -12,7 +12,7 @@ import {
     Star,
     MessageSquare
 } from 'lucide-react';
-import { mockProjects, mockTopicSuggestions, mockUser } from '../../data/mockData';
+import { mockProjects, mockTopicSuggestions, mockUser } from '../data/mockData.js';
 
 const StudentDashboard = () => {
     const currentProject = mockProjects[0];
