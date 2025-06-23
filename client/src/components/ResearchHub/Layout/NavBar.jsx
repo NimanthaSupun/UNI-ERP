@@ -10,7 +10,7 @@ import {
     MessageSquare,
     Settings
 } from 'lucide-react';
-import { mockUser } from '../../data/mockData';
+import { mockUser } from '../data/mockData';
 
 const Navbar = () => {
     const location = useLocation();
@@ -44,9 +44,9 @@ const Navbar = () => {
                     {/* Navigation Links */}
                     <div className="flex items-center space-x-4">
                         <Link
-                            to="/dashboard"
+                            to="/indashboard"
                             className={`flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                                isActive('/dashboard')
+                                isActive('/indashboard')
                                     ? 'text-blue-600 bg-blue-50'
                                     : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
                             }`}

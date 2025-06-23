@@ -5,6 +5,7 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/RegisterForm";
 import Dashboard from "./components/Dashboard";
 import ResearchMentoringPanel from "./components/ResearchMentoringPanel";
+import ResearchHub from '../src/components/ResearchHub/ResearchHub'
 const UniversityERPApp = () => {
   const [currentPage, setCurrentPage] = useState("home");
   const [selectedRole, setSelectedRole] = useState(null);
@@ -29,6 +30,10 @@ const UniversityERPApp = () => {
     case "mentoring":
       // Only show mentoring panel if user is logged in
       return user ? <ResearchMentoringPanel onNavigate={navigate} /> : <RoleSelection onRoleSelect={navigate} />;
+    case "ResearchHub":
+      // Only show mentoring panel if user is logged in
+      return user ? <ResearchHub onNavigate={navigate} /> : <RoleSelection onRoleSelect={navigate} />;
+
     default:
       return <RoleSelection onRoleSelect={navigate} />;
   }
